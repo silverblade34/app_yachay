@@ -1,27 +1,67 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const Color primary = Color(0xff9852F6);
-  static const Color secondary = Color(0xffFFB200);
-  static const Color backgroundLight = Color(0xffF5F4FF);
-  static const Color backgroundDark = Color(0xff220C61);
-  static const Color backgroundDarkIntense = Color(0xff0E0847);
-  static const Color backgroundDarkLigth = Color.fromARGB(128, 149, 117, 205);
-  static const Color textBlackUCV = Color(0xFF0E0847);
-  static const Color backgroundDialogDark = Color.fromARGB(255, 9, 3, 55);
-  static const Color textLight = Color(0xff120C45);
-  static const Color textDarkTitle = Color(0xffE5E3FC);
-  static const Color textDarkSubtitle = Color(0xff9790CC);
-  static const Color textDark = Colors.white;
-  static const Color iconLight = Color(0xff2b2b2b);
-  static const Color iconDark = Colors.white;
+  // --- Paleta Principal basada en la mascota Yachay ---
 
+  // Color Primario: El turquesa vibrante de la llama
+  static const Color primary = Color(0xFF4ECDC4); // Un turquesa alegre y distintivo
+
+  // Color Secundario/Acento: El rojo intenso del poncho
+  static const Color secondary = Color(0xFFD14141); // Un rojo profundo y llamativo
+
+  // Color de Acento Adicional: Un tono dorado/bronceado del libro y detalles de la llama
+  // Útil para elementos sutiles, estados deshabilitados o acentos cálidos.
+  static const Color accent = Color(0xFFEFC96A);
+
+  // --- Colores de Fondo ---
+
+  // Fondo para Temas Claros: Un blanco muy suave, casi crema
+  static const Color backgroundLight = Color(0xFFFBFBFB);
+
+  // Fondo para Temas Oscuros: Un azul-gris oscuro y sofisticado, complementa el turquesa y rojo
+  static const Color backgroundDark = Color(0xFF1A2B3B);
+
+  // Fondo Oscuro Intenso: Aún más oscuro para elementos como AppBars, tarjetas o diálogos en modo oscuro
+  static const Color backgroundDarkIntense = Color(0xFF0E1A2B);
+
+  // Fondo Oscuro Ligero/Transparente: Para superposiciones o diálogos con cierta transparencia
+  static const Color backgroundDarkLigth = Color.fromARGB(128, 26, 43, 59); // 50% opacidad del backgroundDark
+
+  // --- Colores de Texto ---
+
+  // Texto para Fondos Claros: Un color oscuro (similar al backgroundDark) para buena legibilidad
+  static const Color textLight = Color(0xFF1A2B3B);
+
+  // Texto para Fondos Oscuros: Blanco suave para el texto principal
+  static const Color textDark = Color(0xFFFBFBFB);
+
+  // Títulos para Fondos Oscuros: Blanco un poco menos intenso, para jerarquía
+  static const Color textDarkTitle = Color(0xFFF0EFEF);
+
+  // Subtítulos para Fondos Oscuros: Un gris medio para subtítulos y texto menos prominente
+  static const Color textDarkSubtitle = Color(0xFF9AA8B7);
+
+  // --- Colores de Iconos ---
+
+  // Iconos para Fondos Claros
+  static const Color iconLight = Color(0xFF1A2B3B);
+
+  // Iconos para Fondos Oscuros
+  static const Color iconDark = Color(0xFFFBFBFB);
+
+  // --- Otros ---
+
+  // Color de Fondo para Diálogos en Modo Oscuro (consistente con backgroundDarkIntense)
+  static const Color backgroundDialogDark = Color(0xFF0E1A2B);
+
+  // Colores para efecto Shimmer (se pueden ajustar si es necesario, pero estos son estándar)
   // ignore: deprecated_member_use
   static Color shimmerBaseColor = Colors.grey.withOpacity(0.3);
   // ignore: deprecated_member_use
   static Color shimmerHighlightColor = Colors.grey.withOpacity(0.2);
 }
 
+// Clase de utilidad para convertir códigos hexadecimales en colores (ya estaba, mantenida)
 class HexColor extends Color {
   static int _getColorFromHex(String hexColor) {
     hexColor = hexColor.toUpperCase().replaceAll("#", "");
