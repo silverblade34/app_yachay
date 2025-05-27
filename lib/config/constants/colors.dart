@@ -4,10 +4,13 @@ class AppColors {
   // --- Paleta Principal basada en la mascota Yachay ---
 
   // Color Primario: El turquesa vibrante de la llama
-  static const Color primary = Color(0xFF4ECDC4); // Un turquesa alegre y distintivo
+  static const Color primary = Color.fromARGB(255, 54, 143, 137);
+  static const Color primaryDark = Color.fromARGB(255, 26, 102, 97);
 
   // Color Secundario/Acento: El rojo intenso del poncho
-  static const Color secondary = Color(0xFFD14141); // Un rojo profundo y llamativo
+  static const Color secondary = Color(0xFFD14141);
+  static const Color secondaryDark = Color.fromARGB(255, 97, 62, 62);
+  static const Color secondaryLight = Color.fromARGB(255, 203, 125, 125);
 
   // Color de Acento Adicional: Un tono dorado/bronceado del libro y detalles de la llama
   // Útil para elementos sutiles, estados deshabilitados o acentos cálidos.
@@ -25,7 +28,8 @@ class AppColors {
   static const Color backgroundDarkIntense = Color(0xFF0E1A2B);
 
   // Fondo Oscuro Ligero/Transparente: Para superposiciones o diálogos con cierta transparencia
-  static const Color backgroundDarkLigth = Color.fromARGB(128, 26, 43, 59); // 50% opacidad del backgroundDark
+  static const Color backgroundDarkLigth =
+      Color.fromARGB(128, 26, 43, 59); // 50% opacidad del backgroundDark
 
   // --- Colores de Texto ---
 
