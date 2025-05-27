@@ -1,3 +1,7 @@
+import 'package:app_yachay/features/auth/bindings/login_binding.dart';
+import 'package:app_yachay/features/auth/bindings/register_binding.dart';
+import 'package:app_yachay/features/auth/presentation/pages/login_page.dart';
+import 'package:app_yachay/features/auth/presentation/pages/register_page.dart';
 import 'package:app_yachay/features/create_test/bindings/create_test_binding.dart';
 import 'package:app_yachay/features/create_test/presentation/pages/create_test_page.dart';
 import 'package:app_yachay/features/home/bindings/home_binding.dart';
@@ -29,10 +33,22 @@ abstract class AppPages {
       binding: HomeBinding(),
       transition: Transition.fadeIn,
     ),
-      GetPage(
+    GetPage(
       name: Routes.createTest,
       page: () => const CreateTestPage(),
       binding: CreateTestBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: Routes.login,
+      page: () => const LoginPage(),
+      binding: LoginBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: Routes.register,
+      page: () => const RegisterPage(),
+      binding: RegisterBinding(),
       transition: Transition.fadeIn,
     )
   ];

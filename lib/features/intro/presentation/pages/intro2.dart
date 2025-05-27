@@ -21,7 +21,7 @@ class Intro2 extends StatelessWidget {
       ),
       indicators: IntroIndicators(
         onBack: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const Intro1())),
-        onNext: () => Get.offAllNamed(Routes.home),
+        onNext: () => Get.offAllNamed(Routes.login),
         activeIndex: [2],
       ),
     );
