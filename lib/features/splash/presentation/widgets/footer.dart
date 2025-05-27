@@ -1,5 +1,6 @@
 import 'package:app_yachay/config/constants/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Footer extends StatelessWidget {
   const Footer({super.key});
@@ -19,9 +20,11 @@ class Footer extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                 decoration: BoxDecoration(
+                  // ignore: deprecated_member_use
                   color: Colors.white.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(20.r),
                   border: Border.all(
+                    // ignore: deprecated_member_use
                     color: Colors.white.withOpacity(0.2),
                     width: 1,
                   ),
@@ -38,7 +41,7 @@ class Footer extends StatelessWidget {
                     Text(
                       'Maquiadev',
                       style: TextStyle(
-                        fontSize: 12,
+                        fontSize: 12.sp,
                         // ignore: deprecated_member_use
                         color: Colors.white.withOpacity(0.8),
                         fontWeight: FontWeight.w400,
@@ -47,7 +50,7 @@ class Footer extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(height: 12),
+              SizedBox(height: 12.h),
               Text(
                 'v1.0.0',
                 style: TextStyle(

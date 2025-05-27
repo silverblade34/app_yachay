@@ -172,7 +172,7 @@ class AppTheme {
         onError: Colors.black, // Texto/iconos sobre color de error
       ),
       appBarTheme: AppBarTheme(
-        color: AppColors.backgroundDarkIntense, // Un color de fondo oscuro de tu paleta
+        color: AppColors.backgroundDark, // Un color de fondo oscuro de tu paleta
         elevation: 0,
         titleTextStyle: _buildTextTheme(base.textTheme, false).titleLarge?.copyWith(color: AppColors.textDarkTitle),
         iconTheme: IconThemeData(color: AppColors.iconDark),
@@ -180,7 +180,7 @@ class AppTheme {
       ),
       iconTheme: IconThemeData(color: AppColors.iconDark),
       primaryColor: AppColors.primary,
-      scaffoldBackgroundColor: AppColors.backgroundDarkIntense,
+      scaffoldBackgroundColor: AppColors.backgroundDark,
       textTheme: _buildTextTheme(base.textTheme, false), // Pasa 'false' para tema oscuro
       primaryTextTheme: _buildTextTheme(base.primaryTextTheme, false),
 

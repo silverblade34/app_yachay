@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:app_yachay/config/themes/theme.dart';
 import 'package:app_yachay/config/routes/pages.dart';
 import 'package:app_yachay/core/controllers/theme_controller.dart';
@@ -9,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dart:developer' as developer;
 
 void main() async {
@@ -26,14 +26,24 @@ void main() async {
   ]);
 
   WakelockPlus.enable();
-  runApp(GetMaterialApp(
-    title: "Yachay",
-    debugShowCheckedModeBanner: false,
-    initialRoute: Routes.splash,
-    theme: AppTheme.getTheme(),
-    defaultTransition: Transition.fade,
-    getPages: AppPages.pages,
-  ));
+
+  runApp(
+    ScreenUtilInit(
+      designSize: Size(375, 812),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        return GetMaterialApp(
+          title: "Yachay",
+          debugShowCheckedModeBanner: false,
+          initialRoute: Routes.splash,
+          theme: AppTheme.getTheme(),
+          defaultTransition: Transition.fade,
+          getPages: AppPages.pages,
+        );
+      },
+    ),
+  );
 }
 
 class MyHttpOverrides extends HttpOverrides {

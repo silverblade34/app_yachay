@@ -1,5 +1,6 @@
 import 'package:app_yachay/config/constants/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppTitle extends StatelessWidget {
   const AppTitle({super.key});
@@ -20,16 +21,16 @@ class AppTitle extends StatelessWidget {
                 Text(
                   'Yachay',
                   style: TextStyle(
-                    fontSize: 48,
+                    fontSize: 40.sp,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
-                    letterSpacing: 2,
+                    letterSpacing: 2.sp,
                     shadows: [
                       Shadow(
                         // ignore: deprecated_member_use
                         color: AppColors.backgroundDark.withOpacity(0.3),
-                        offset: const Offset(0, 4),
-                        blurRadius: 8,
+                        offset: Offset(0, 4.h),
+                        blurRadius: 8.r,
                       ),
                     ],
                   ),

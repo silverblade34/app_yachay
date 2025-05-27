@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LoadingIndicator extends StatelessWidget {
   const LoadingIndicator({super.key});
 
   @override
   Widget build(BuildContext context) {
-     return TweenAnimationBuilder<double>(
+    return TweenAnimationBuilder<double>(
       duration: const Duration(milliseconds: 3000),
       tween: Tween(begin: 0.0, end: 1.0),
       curve: Curves.easeInOut,
@@ -43,7 +44,7 @@ class LoadingIndicator extends StatelessWidget {
               Text(
                 'Preparando tu experiencia...',
                 style: TextStyle(
-                  fontSize: 14,
+                  fontSize: 14.sp,
                   // ignore: deprecated_member_use
                   color: Colors.white.withOpacity(0.8),
                   fontWeight: FontWeight.w300,
@@ -54,4 +55,5 @@ class LoadingIndicator extends StatelessWidget {
         );
       },
     );
-  }}
+  }
+}

@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TagLine extends StatelessWidget {
-  const TagLine({super.key});
+  final String description;
+
+  const TagLine({
+    super.key,
+    required this.description,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,14 +23,14 @@ class TagLine extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: Text(
-                'Aprende sin límites con IA',
+                description,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 16.sp,
                   // ignore: deprecated_member_use
                   color: Colors.white.withOpacity(0.9),
                   fontWeight: FontWeight.w300,
-                  letterSpacing: 0.5,
+                  letterSpacing: 0.5.sp,
                 ),
               ),
             ),

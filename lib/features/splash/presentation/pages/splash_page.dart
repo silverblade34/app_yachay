@@ -1,4 +1,3 @@
-import 'package:app_yachay/config/constants/colors.dart';
 import 'package:app_yachay/features/splash/controllers/splash_controller.dart';
 import 'package:app_yachay/features/splash/presentation/widgets/animated_logo.dart';
 import 'package:app_yachay/features/splash/presentation/widgets/app_title.dart';
@@ -24,46 +23,32 @@ class SplashPage extends GetView<SplashController> {
             colors: [
               Theme.of(context).scaffoldBackgroundColor,
               // ignore: deprecated_member_use
-              AppColors.primaryDark,
+              const Color.fromARGB(255, 18, 77, 73),
               // ignore: deprecated_member_use
-              AppColors.primary,
+              const Color.fromARGB(255, 43, 118, 113),
             ],
           ),
         ),
         child: SafeArea(
           child: Column(
             children: [
-              // Espaciado superior
-              const Spacer(flex: 1),
-
-              // Contenedor principal con animaciones
               Expanded(
                 flex: 6,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // Logo/Mascota con animación
                     AnimatedLogo(),
-
                     const SizedBox(height: 40),
-
-                    // Título de la app
                     AppTitle(),
-
                     const SizedBox(height: 16),
-
-                    // Subtítulo/Tagline
-                    TagLine(),
-
+                    TagLine(
+                      description: description,
+                    ),
                     const SizedBox(height: 60),
-
-                    // Indicador de carga
                     LoadingIndicator(),
                   ],
                 ),
               ),
-
-              // Footer con versión
               Footer(),
               const SizedBox(height: 20),
             ],
