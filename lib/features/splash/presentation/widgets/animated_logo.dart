@@ -14,7 +14,7 @@ class AnimatedLogo extends StatelessWidget {
         return Transform.scale(
           scale: value,
           child: Image.asset(
-            ConstanceData.yachaySaludando,
+            ConstanceData.yachayIntro,
             height: MediaQuery.of(context).size.height * 0.3,
             fit: BoxFit.cover,
           ),
