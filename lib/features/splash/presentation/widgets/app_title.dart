@@ -24,7 +24,6 @@ class AppTitle extends StatelessWidget {
                     fontSize: 40.sp,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
-                    letterSpacing: 2.sp,
                     shadows: [
                       Shadow(
                         // ignore: deprecated_member_use
@@ -40,7 +39,7 @@ class AppTitle extends StatelessWidget {
                   height: 4,
                   margin: const EdgeInsets.only(top: 8),
                   decoration: BoxDecoration(
-                    color: AppColors.accent,
+                    color: AppColors.secondary,
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),

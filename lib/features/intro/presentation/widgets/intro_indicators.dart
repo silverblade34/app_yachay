@@ -1,26 +1,22 @@
 import 'package:app_yachay/config/constants/colors.dart';
-import 'package:app_yachay/config/themes/theme.dart';
-import 'package:app_yachay/core/widgets/buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:ionicons/ionicons.dart';
 
 class IntroIndicators extends StatelessWidget {
-  final VoidCallback? onBack;
-  final VoidCallback? onNext;
-  final List<int> activeIndex;
+  final int currentPageIndex;
+  final int totalIndicators;
 
   const IntroIndicators({
     super.key,
-    this.onBack,
-    this.onNext,
-    required this.activeIndex,
+    required this.currentPageIndex,
+    required this.totalIndicators,
   });
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> indicators = List.generate(3, (i) {
-      bool isActive = i == activeIndex[0];
+
+    List<Widget> indicators = List.generate(totalIndicators, (i) {
+      bool isActive = i == currentPageIndex;
       return Container(
         margin: EdgeInsets.symmetric(horizontal: 5.r),
         height: 10.h,
@@ -35,18 +31,9 @@ class IntroIndicators extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        onBack != null
-            ? MyIcon1(
-                bg: AppTheme.isLightTheme
-                    ? HexColor('#FFE5E5')
-                    : AppColors.secondaryDark,
-                click: onBack!,
-                icon: Ionicons.chevron_back,
-                icolor: AppColors.secondaryLight,
-              )
-            : SizedBox(width: 60.w),
+        SizedBox(),
         Row(children: indicators),
-        MyIcon(click: onNext!),
+        SizedBox(),
       ],
     );
   }
