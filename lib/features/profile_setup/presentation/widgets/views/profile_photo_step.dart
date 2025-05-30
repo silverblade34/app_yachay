@@ -1,4 +1,5 @@
 import 'package:app_yachay/config/constants/colors.dart';
+import 'package:app_yachay/config/constants/responsive.dart';
 import 'package:app_yachay/features/profile_setup/controllers/profile_setup_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,18 +12,16 @@ class ProfilePhotoStep extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: EdgeInsets.fromLTRB(24, 0, 24, 24), // Menos padding arriba
+      padding: AppResponsive.paddingOnly(left: 24, right: 24, bottom: 24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          // Ya no necesitamos el título y botón atrás aquí
-          SizedBox(height: 16), // Espacio reducido
+          AppResponsive.verticalSpace12,
 
-          // Vista previa del perfil actual
           Obx(() {
             return Container(
-              width: 120,
-              height: 120,
+              width: AppResponsive.width(100),
+              height: AppResponsive.height(100),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 gradient: LinearGradient(
@@ -32,8 +31,9 @@ class ProfilePhotoStep extends StatelessWidget {
                 ),
                 boxShadow: [
                   BoxShadow(
+                    // ignore: deprecated_member_use
                     color: AppColors.primary.withOpacity(0.3),
-                    blurRadius: 20,
+                    blurRadius: 13,
                     spreadRadius: 5,
                   ),
                 ],
@@ -54,46 +54,41 @@ class ProfilePhotoStep extends StatelessWidget {
                         )
                       : Icon(
                           Icons.person,
-                          size: 60,
+                          size: AppResponsive.iconSizeXLarge,
                           color: AppColors.textDark,
                         ),
             );
           }),
 
-          SizedBox(height: 32),
+          AppResponsive.verticalSpace16,
 
-          // Opción de subir foto
           _buildPhotoOption(
             title: 'Subir mi foto',
             subtitle: 'Usa una foto desde tu galería',
             icon: Icons.camera_alt_rounded,
-            onTap: () {
-              // Aquí implementarías la lógica para seleccionar foto
-              // controller.profileImage.value = 'path_to_image';
-            },
+            onTap: () {},
           ),
 
-          SizedBox(height: 24),
+          AppResponsive.verticalSpace16,
 
           Text(
             'O elige un avatar',
-            style: TextStyle(
-              color: AppColors.textDarkTitle,
-              fontSize: 18,
+            style: AppResponsive.textStyle(
+              fontSize: AppResponsive.fontSizeLarge,
               fontWeight: FontWeight.w600,
+              color: AppColors.textDarkTitle,
             ),
           ),
 
-          SizedBox(height: 16),
+          AppResponsive.verticalSpace16,
 
-          // Grid de avatares
           GridView.builder(
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,
-              crossAxisSpacing: 16,
-              mainAxisSpacing: 16,
+              crossAxisSpacing: AppResponsive.spacing16,
+              mainAxisSpacing: AppResponsive.spacing16,
             ),
             itemCount: controller.avatarOptions.length,
             itemBuilder: (context, index) {
@@ -103,42 +98,42 @@ class ProfilePhotoStep extends StatelessWidget {
                 return GestureDetector(
                   onTap: () {
                     controller.selectedAvatar.value = avatar;
-                    // Limpiar la imagen de perfil si se selecciona un avatar
                     controller.profileImage.value = '';
                   },
                   child: AnimatedContainer(
-                      duration: Duration(milliseconds: 300),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: isSelected
-                              ? AppColors.primary
-                              : Colors.transparent,
-                          width: 3,
-                        ),
-                        boxShadow: isSelected
-                            ? [
-                                BoxShadow(
-                                  color: AppColors.primary.withOpacity(0.5),
-                                  blurRadius: 10,
-                                  spreadRadius: 2,
-                                ),
-                              ]
-                            : null,
+                    duration: const Duration(milliseconds: 300),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: isSelected
+                            ? AppColors.primary
+                            : Colors.transparent,
+                        width: 3,
                       ),
-                      child: ClipOval(
-                        child: Image.asset(
-                          avatar,
-                          fit: BoxFit.contain,
-                        ),
-                      )),
+                      boxShadow: isSelected
+                          ? [
+                              BoxShadow(
+                                // ignore: deprecated_member_use
+                                color: AppColors.primary.withOpacity(0.5),
+                                blurRadius: 10,
+                                spreadRadius: 2,
+                              ),
+                            ]
+                          : null,
+                    ),
+                    child: ClipOval(
+                      child: Image.asset(
+                        avatar,
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                  ),
                 );
               });
             },
           ),
 
-          SizedBox(height: 40),
-          // El botón de navegación ahora está en la parte inferior de la página principal
+          AppResponsive.verticalSpace40,
         ],
       ),
     );
@@ -153,56 +148,36 @@ class ProfilePhotoStep extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.all(20),
+        padding: AppResponsive.paddingXRegular,
         decoration: BoxDecoration(
           color: AppColors.backgroundDarkIntense,
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(
-            color: AppColors.primary.withOpacity(0.3),
-            width: 1,
-          ),
+          borderRadius: AppResponsive.borderRadiusRegular,
         ),
         child: Row(
           children: [
-            Container(
-              padding: EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: AppColors.primary.withOpacity(0.2),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Icon(
-                icon,
-                color: AppColors.primary,
-                size: 24,
-              ),
-            ),
-            SizedBox(width: 16),
+            Icon(icon, color: AppColors.primary),
+            AppResponsive.horizontalSpace16,
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     title,
-                    style: TextStyle(
-                      color: AppColors.textDarkTitle,
-                      fontSize: 16,
+                    style: AppResponsive.textStyle(
                       fontWeight: FontWeight.w600,
+                      fontSize: AppResponsive.fontSizeRegular,
+                      color: AppColors.textDarkTitle,
                     ),
                   ),
                   Text(
                     subtitle,
-                    style: TextStyle(
-                      color: AppColors.textDarkSubtitle,
-                      fontSize: 14,
+                    style: AppResponsive.textStyle(
+                      fontSize: AppResponsive.fontSizeSmall,
+                      color: AppColors.textDark,
                     ),
                   ),
                 ],
               ),
-            ),
-            Icon(
-              Icons.arrow_forward_ios_rounded,
-              color: AppColors.textDarkSubtitle,
-              size: 16,
             ),
           ],
         ),

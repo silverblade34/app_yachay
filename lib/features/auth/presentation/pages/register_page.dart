@@ -1,13 +1,13 @@
 import 'package:app_yachay/config/constants/colors.dart';
 import 'package:app_yachay/config/constants/constance.dart';
 import 'package:app_yachay/config/constants/fonts.dart';
+import 'package:app_yachay/config/constants/responsive.dart';
 import 'package:app_yachay/core/widgets/custom_text_field.dart';
 import 'package:app_yachay/core/widgets/google_sign_in_button.dart';
 import 'package:app_yachay/features/auth/controllers/auth_controller.dart';
 import 'package:app_yachay/features/auth/presentation/widgets/auth_button.dart';
 import 'package:app_yachay/features/auth/presentation/widgets/auth_dividir.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class RegisterPage extends GetView<AuthController> {
@@ -20,25 +20,25 @@ class RegisterPage extends GetView<AuthController> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
-            padding: const EdgeInsets.all(24),
+            padding: AppResponsive.paddingLarge,
             child: Column(
               children: [
                 _buildHeader(),
-                const SizedBox(height: 32),
+                AppResponsive.verticalSpace32,
                 _buildRegisterForm(),
-                const SizedBox(height: 24),
+                AppResponsive.verticalSpace20,
                 AuthButton(
                   isLoading: controller.isLoading,
                   onPressed: controller.registerWithEmail,
                   text: 'Crear Cuenta',
-                  fontSize: 14,
-                  padding: EdgeInsets.symmetric(vertical: 12),
+                  fontSize: AppResponsive.fontSizeRegular,
+                  padding: AppResponsive.paddingVertical,
                 ),
-                const SizedBox(height: 24),
-                AuthDivider(text: 'o regístrate con'),
-                const SizedBox(height: 24),
+                AppResponsive.verticalSpace12,
+                const AuthDivider(text: 'o regístrate con'),
+                AppResponsive.verticalSpace12,
                 _buildSocialRegister(),
-                const SizedBox(height: 32),
+                AppResponsive.verticalSpace32,
                 //_buildFooter(),
               ],
             ),
@@ -57,25 +57,26 @@ class RegisterPage extends GetView<AuthController> {
             GestureDetector(
               onTap: () => Get.back(),
               child: Container(
-                padding: const EdgeInsets.all(12),
+                padding: AppResponsive.paddingSymmetric(
+                  horizontal: 12,
+                  vertical: 12,
+                ),
                 decoration: BoxDecoration(
                   color: AppColors.backgroundDarkIntense,
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: AppResponsive.borderRadiusRegular,
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.arrow_back_ios_new,
                   color: Colors.white,
-                  size: 20,
+                  size: AppResponsive.iconSizeMedium,
                 ),
               ),
             ),
             const Spacer(),
             Container(
-              width: 80,
-              height: 80,
+              width: AppResponsive.width(80),
+              height: AppResponsive.height(80),
               decoration: BoxDecoration(
-                // ignore: deprecated_member_use
-                //color: AppColors.primary.withOpacity(0.1),
                 shape: BoxShape.circle,
                 border: Border.all(
                   // ignore: deprecated_member_use
@@ -84,7 +85,7 @@ class RegisterPage extends GetView<AuthController> {
                 ),
               ),
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: AppResponsive.paddingSmall,
                 child: Image.asset(
                   ConstanceData.yachaMonocramaticoCelebrandoBlanco,
                   fit: BoxFit.cover,
@@ -92,12 +93,15 @@ class RegisterPage extends GetView<AuthController> {
               ),
             ),
             const Spacer(),
-            SizedBox(width: 44.w),
+            SizedBox(width: AppResponsive.width(44)),
           ],
         ),
-        SizedBox(height: 28.h),
-        Text('¡Únete a Yachay!', style: AppFonts.titleLogin),
-        SizedBox(height: 8.h),
+        AppResponsive.verticalSpace(28),
+        Text(
+          '¡Únete a Yachay!',
+          style: AppFonts.titleLogin,
+        ),
+        AppResponsive.verticalSpace8,
         Text(
           'Crea tu cuenta y comienza a aprender',
           style: AppFonts.descriptionLogin,
@@ -115,13 +119,13 @@ class RegisterPage extends GetView<AuthController> {
           hintText: 'Nombre',
           icon: Icons.person_outline,
         ),
-        SizedBox(height: 14.h),
+        AppResponsive.verticalSpace(14),
         CustomTextField(
           controller: controller.emailController,
           hintText: 'Email',
           icon: Icons.email_outlined,
         ),
-        SizedBox(height: 14.h),
+        AppResponsive.verticalSpace(14),
         Obx(() => CustomTextField(
               controller: controller.passwordController,
               hintText: 'Contraseña',
@@ -130,7 +134,7 @@ class RegisterPage extends GetView<AuthController> {
               isObscure: controller.isPasswordHidden.value,
               onToggleVisibility: controller.togglePasswordVisibility,
             )),
-        SizedBox(height: 14.h),
+        AppResponsive.verticalSpace(14),
         Obx(() => CustomTextField(
               controller: controller.confirmPasswordController,
               hintText: 'Confirmar contraseña',
@@ -139,7 +143,7 @@ class RegisterPage extends GetView<AuthController> {
               isObscure: controller.isConfirmPasswordHidden.value,
               onToggleVisibility: controller.toggleConfirmPasswordVisibility,
             )),
-        SizedBox(height: 14.h),
+        AppResponsive.verticalSpace(14),
         _buildTermsCheckbox(),
       ],
     );
@@ -160,15 +164,16 @@ class RegisterPage extends GetView<AuthController> {
           Expanded(
             child: RichText(
               text: TextSpan(
-                style: const TextStyle(
+                style: AppResponsive.textStyle(
+                  fontSize: AppResponsive.fontSizeSmall,
                   color: Colors.white70,
-                  fontSize: 14,
                 ),
                 children: [
                   const TextSpan(text: 'Acepto los '),
                   TextSpan(
                     text: 'Términos y Condiciones',
-                    style: const TextStyle(
+                    style: AppResponsive.textStyle(
+                      fontSize: AppResponsive.fontSizeSmall,
                       color: AppColors.primary,
                       fontWeight: FontWeight.w500,
                     ),
@@ -176,7 +181,8 @@ class RegisterPage extends GetView<AuthController> {
                   const TextSpan(text: ' y la '),
                   TextSpan(
                     text: 'Política de Privacidad',
-                    style: const TextStyle(
+                    style: AppResponsive.textStyle(
+                      fontSize: AppResponsive.fontSizeSmall,
                       color: AppColors.primary,
                       fontWeight: FontWeight.w500,
                     ),

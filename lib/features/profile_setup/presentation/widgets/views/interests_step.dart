@@ -1,6 +1,8 @@
 import 'package:app_yachay/config/constants/colors.dart';
+import 'package:app_yachay/config/constants/responsive.dart';
 import 'package:app_yachay/features/profile_setup/controllers/profile_setup_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class InterestsStep extends StatelessWidget {
@@ -11,34 +13,31 @@ class InterestsStep extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: EdgeInsets.all(24),
+      padding: AppResponsive.paddingLarge,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Contadores de selección
           _buildSelectionCounters(),
 
-          SizedBox(height: 32),
+          AppResponsive.verticalSpace16,
 
-          // Sección: ¿Qué te gusta?
           _buildSectionTitle(
             '🎯 ¿Qué te gusta?',
             'Temas que ya conoces o te interesan',
           ),
-          SizedBox(height: 16),
+          AppResponsive.verticalSpace16,
           _buildInterestsGrid(isPreferences: true),
 
-          SizedBox(height: 32),
+          AppResponsive.verticalSpace16,
 
-          // Sección: ¿Qué quieres aprender?
           _buildSectionTitle(
             '🚀 ¿Qué quieres aprender?',
             'Nuevas áreas que quieres explorar',
           ),
-          SizedBox(height: 16),
+          AppResponsive.verticalSpace16,
           _buildInterestsGrid(isPreferences: false),
 
-          SizedBox(height: 40),
+          AppResponsive.verticalSpace40,
         ],
       ),
     );
@@ -50,36 +49,40 @@ class InterestsStep extends StatelessWidget {
         children: [
           Expanded(
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              padding: AppResponsive.paddingSymmetric(
+                  horizontal: 16, vertical: 8),
               decoration: BoxDecoration(
+                // ignore: deprecated_member_use
                 color: AppColors.primary.withOpacity(0.2),
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: AppResponsive.borderRadiusXLarge,
               ),
               child: Text(
                 '${controller.selectedPreferences.length} te gustan',
-                style: TextStyle(
-                  color: AppColors.primary,
+                style: AppResponsive.textStyle(
+                  fontSize: AppResponsive.fontSizeXSmall,
                   fontWeight: FontWeight.w600,
-                  fontSize: 12,
+                  color: AppColors.primary,
                 ),
                 textAlign: TextAlign.center,
               ),
             ),
           ),
-          SizedBox(width: 12),
+          AppResponsive.horizontalSpace12,
           Expanded(
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              padding: AppResponsive.paddingSymmetric(
+                  horizontal: 16, vertical: 8),
               decoration: BoxDecoration(
+                // ignore: deprecated_member_use
                 color: Colors.orange.withOpacity(0.2),
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: AppResponsive.borderRadiusXLarge,
               ),
               child: Text(
                 '${controller.selectedLearningGoals.length} quieres aprender',
-                style: TextStyle(
-                  color: Colors.orange,
+                style: AppResponsive.textStyle(
+                  fontSize: AppResponsive.fontSizeXSmall,
                   fontWeight: FontWeight.w600,
-                  fontSize: 12,
+                  color: Colors.orange,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -96,18 +99,18 @@ class InterestsStep extends StatelessWidget {
       children: [
         Text(
           title,
-          style: TextStyle(
-            color: AppColors.textDarkTitle,
-            fontSize: 20,
+          style: AppResponsive.textStyle(
+            fontSize: AppResponsive.fontSizeRegular,
             fontWeight: FontWeight.bold,
+            color: AppColors.textDarkTitle,
           ),
         ),
-        SizedBox(height: 4),
+        AppResponsive.verticalSpace4,
         Text(
           subtitle,
-          style: TextStyle(
+          style: AppResponsive.textStyle(
+            fontSize: AppResponsive.fontSizeMedium,
             color: AppColors.textDarkSubtitle,
-            fontSize: 14,
           ),
         ),
       ],
@@ -122,8 +125,8 @@ class InterestsStep extends StatelessWidget {
       final primaryColor = isPreferences ? AppColors.primary : Colors.orange;
 
       return Wrap(
-        spacing: 12,
-        runSpacing: 12,
+        spacing: AppResponsive.spacing4,
+        runSpacing: AppResponsive.spacing4,
         children: controller.availableTopics.map((topic) {
           final isSelected = selectedList.contains(topic);
           return GestureDetector(
@@ -132,19 +135,22 @@ class InterestsStep extends StatelessWidget {
                 : controller.toggleLearningGoal(topic),
             child: AnimatedContainer(
               duration: Duration(milliseconds: 300),
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              padding: AppResponsive.paddingSymmetric(
+                  horizontal: 10, vertical: 6),
               decoration: BoxDecoration(
                 color:
                     isSelected ? primaryColor : AppColors.backgroundDarkIntense,
-                borderRadius: BorderRadius.circular(25),
+                borderRadius: BorderRadius.circular(25.r),
                 border: Border.all(
                   color:
+                      // ignore: deprecated_member_use
                       isSelected ? primaryColor : primaryColor.withOpacity(0.3),
                   width: 1,
                 ),
                 boxShadow: isSelected
                     ? [
                         BoxShadow(
+                          // ignore: deprecated_member_use
                           color: primaryColor.withOpacity(0.3),
                           blurRadius: 8,
                           spreadRadius: 1,
@@ -154,9 +160,13 @@ class InterestsStep extends StatelessWidget {
               ),
               child: Text(
                 topic,
-                style: TextStyle(
-                  color: isSelected ? Colors.white : AppColors.textDarkTitle,
-                  fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+                style: AppResponsive.textStyle(
+                  fontSize: AppResponsive.fontSizeSmall,
+                  color: isSelected
+                      ? Colors.white
+                      : AppColors.textDarkTitle,
+                  fontWeight:
+                      isSelected ? FontWeight.w600 : FontWeight.normal,
                 ),
               ),
             ),
@@ -166,3 +176,4 @@ class InterestsStep extends StatelessWidget {
     });
   }
 }
+

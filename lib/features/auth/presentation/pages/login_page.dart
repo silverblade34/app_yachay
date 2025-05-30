@@ -1,4 +1,5 @@
 import 'package:app_yachay/config/constants/colors.dart';
+import 'package:app_yachay/config/constants/responsive.dart';
 import 'package:app_yachay/core/widgets/custom_text_field.dart';
 import 'package:app_yachay/core/widgets/google_sign_in_button.dart';
 import 'package:app_yachay/features/auth/controllers/auth_controller.dart';
@@ -8,7 +9,6 @@ import 'package:app_yachay/features/auth/presentation/widgets/auth_footer.dart';
 import 'package:app_yachay/features/auth/presentation/widgets/auth_header.dart';
 import 'package:app_yachay/features/auth/presentation/widgets/social_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class LoginPage extends GetView<AuthController> {
@@ -21,7 +21,7 @@ class LoginPage extends GetView<AuthController> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: SizedBox(
-            height: 1.sh - MediaQuery.of(context).padding.top,
+            height: AppResponsive.getFullHeight(context),
             child: Column(
               children: [
                 const AuthHeader(),
@@ -37,7 +37,7 @@ class LoginPage extends GetView<AuthController> {
 
   Widget _buildLoginForm() {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 24.w),
+      padding: AppResponsive.paddingHorizontal,
       child: Column(
         children: [
           CustomTextField(
@@ -45,7 +45,7 @@ class LoginPage extends GetView<AuthController> {
             hintText: 'Email',
             icon: Icons.email_outlined,
           ),
-          SizedBox(height: 16.h),
+          AppResponsive.verticalSpace16,
           Obx(() => CustomTextField(
                 controller: controller.passwordController,
                 hintText: 'Contraseña',
@@ -54,19 +54,19 @@ class LoginPage extends GetView<AuthController> {
                 isObscure: controller.isPasswordHidden.value,
                 onToggleVisibility: controller.togglePasswordVisibility,
               )),
-          SizedBox(height: 12.h),
+          AppResponsive.verticalSpace12,
           _buildRememberAndForgot(),
-          SizedBox(height: 12.h),
+          AppResponsive.verticalSpace12,
           AuthButton(
             isLoading: controller.isLoading,
             onPressed: controller.loginWithEmail,
             text: 'Iniciar Sesión',
-            fontSize: 14,
-            padding: EdgeInsets.symmetric(vertical: 12),
+            fontSize: AppResponsive.fontSizeRegular,
+            padding: AppResponsive.paddingVertical,
           ),
-          SizedBox(height: 12.h),
+          AppResponsive.verticalSpace12,
           const AuthDivider(text: 'o continúa con'),
-          SizedBox(height: 12.h),
+          AppResponsive.verticalSpace12,
           _buildSocialLogin(),
         ],
       ),
@@ -88,10 +88,7 @@ class LoginPage extends GetView<AuthController> {
                 ),
                 Text(
                   'Recordarme',
-                  style: TextStyle(
-                    color: Colors.white70,
-                    fontSize: 12.sp,
-                  ),
+                  style: AppResponsive.checkboxTextStyle,
                 ),
               ],
             )),
@@ -100,11 +97,7 @@ class LoginPage extends GetView<AuthController> {
           onTap: controller.forgotPassword,
           child: Text(
             '¿Olvidaste tu contraseña?',
-            style: TextStyle(
-              color: AppColors.primary,
-              fontSize: 12.sp,
-              fontWeight: FontWeight.w500,
-            ),
+            style: AppResponsive.linkTextStyle,
           ),
         ),
       ],
@@ -118,7 +111,7 @@ class LoginPage extends GetView<AuthController> {
           buttonText: 'Continúa con Google',
           onPressed: controller.loginWithGoogle,
         ),
-        SizedBox(height: 16.h),
+        AppResponsive.verticalSpace16,
         Row(
           children: [
             Expanded(
@@ -128,7 +121,7 @@ class LoginPage extends GetView<AuthController> {
                 onTap: () {},
               ),
             ),
-            SizedBox(width: 12.w),
+            AppResponsive.horizontalSpace12,
             Expanded(
               child: SocialButton(
                 icon: Icons.apple,
