@@ -15,131 +15,154 @@ class InterestsStep extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 24),
+          // Contadores de selección
+          _buildSelectionCounters(),
 
-          // Contador de seleccionados
-          Obx(() {
-            return Container(
+          SizedBox(height: 32),
+
+          // Sección: ¿Qué te gusta?
+          _buildSectionTitle(
+            '🎯 ¿Qué te gusta?',
+            'Temas que ya conoces o te interesan',
+          ),
+          SizedBox(height: 16),
+          _buildInterestsGrid(isPreferences: true),
+
+          SizedBox(height: 32),
+
+          // Sección: ¿Qué quieres aprender?
+          _buildSectionTitle(
+            '🚀 ¿Qué quieres aprender?',
+            'Nuevas áreas que quieres explorar',
+          ),
+          SizedBox(height: 16),
+          _buildInterestsGrid(isPreferences: false),
+
+          SizedBox(height: 40),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSelectionCounters() {
+    return Obx(() {
+      return Row(
+        children: [
+          Expanded(
+            child: Container(
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               decoration: BoxDecoration(
                 color: AppColors.primary.withOpacity(0.2),
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Text(
-                '${controller.selectedInterests.length} seleccionados',
+                '${controller.selectedPreferences.length} te gustan',
                 style: TextStyle(
                   color: AppColors.primary,
                   fontWeight: FontWeight.w600,
+                  fontSize: 12,
                 ),
+                textAlign: TextAlign.center,
               ),
-            );
-          }),
-
-          SizedBox(height: 24),
-
-          // Grid de intereses
-          Obx(() {
-            return Wrap(
-              spacing: 12,
-              runSpacing: 12,
-              children: controller.interestOptions.map((interest) {
-                final isSelected =
-                    controller.selectedInterests.contains(interest);
-                return GestureDetector(
-                  onTap: () => controller.toggleInterest(interest),
-                  child: AnimatedContainer(
-                    duration: Duration(milliseconds: 300),
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                    decoration: BoxDecoration(
-                      color: isSelected
-                          ? AppColors.primary
-                          : AppColors.backgroundDarkIntense,
-                      borderRadius: BorderRadius.circular(25),
-                      border: Border.all(
-                        color: isSelected
-                            ? AppColors.primary
-                            : AppColors.primary.withOpacity(0.3),
-                        width: 1,
-                      ),
-                      boxShadow: isSelected
-                          ? [
-                              BoxShadow(
-                                color: AppColors.primary.withOpacity(0.3),
-                                blurRadius: 8,
-                                spreadRadius: 1,
-                              ),
-                            ]
-                          : null,
-                    ),
-                    child: Text(
-                      interest,
-                      style: TextStyle(
-                        color: isSelected
-                            ? AppColors.textDark
-                            : AppColors.textDarkTitle,
-                        fontWeight:
-                            isSelected ? FontWeight.w600 : FontWeight.normal,
-                      ),
-                    ),
-                  ),
-                );
-              }).toList(),
-            );
-          }),
-
-          SizedBox(height: 40),
-
-          // Botón finalizar
-          _buildFinishButton(),
+            ),
+          ),
+          SizedBox(width: 12),
+          Expanded(
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              decoration: BoxDecoration(
+                color: Colors.orange.withOpacity(0.2),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Text(
+                '${controller.selectedLearningGoals.length} quieres aprender',
+                style: TextStyle(
+                  color: Colors.orange,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 12,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
         ],
-      ),
+      );
+    });
+  }
+
+  Widget _buildSectionTitle(String title, String subtitle) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: TextStyle(
+            color: AppColors.textDarkTitle,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        SizedBox(height: 4),
+        Text(
+          subtitle,
+          style: TextStyle(
+            color: AppColors.textDarkSubtitle,
+            fontSize: 14,
+          ),
+        ),
+      ],
     );
   }
 
-  Widget _buildFinishButton() {
-    return SizedBox(
-      width: double.infinity,
-      child: Obx(() {
-        final canProceed = controller.canProceedStep3();
-        return AnimatedContainer(
-          duration: Duration(milliseconds: 300),
-          child: ElevatedButton(
-            onPressed: canProceed
-                ? () {
-                    // Aquí guardarías los datos del perfil
-                    Get.offAllNamed('/home'); // Navegar a la pantalla principal
-                  }
-                : null,
-            style: ElevatedButton.styleFrom(
-              backgroundColor:
-                  canProceed ? AppColors.primary : AppColors.textDarkSubtitle,
-              foregroundColor: AppColors.textDark,
-              padding: EdgeInsets.symmetric(vertical: 18),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
+  Widget _buildInterestsGrid({required bool isPreferences}) {
+    return Obx(() {
+      final selectedList = isPreferences
+          ? controller.selectedPreferences
+          : controller.selectedLearningGoals;
+      final primaryColor = isPreferences ? AppColors.primary : Colors.orange;
+
+      return Wrap(
+        spacing: 12,
+        runSpacing: 12,
+        children: controller.availableTopics.map((topic) {
+          final isSelected = selectedList.contains(topic);
+          return GestureDetector(
+            onTap: () => isPreferences
+                ? controller.togglePreference(topic)
+                : controller.toggleLearningGoal(topic),
+            child: AnimatedContainer(
+              duration: Duration(milliseconds: 300),
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              decoration: BoxDecoration(
+                color:
+                    isSelected ? primaryColor : AppColors.backgroundDarkIntense,
+                borderRadius: BorderRadius.circular(25),
+                border: Border.all(
+                  color:
+                      isSelected ? primaryColor : primaryColor.withOpacity(0.3),
+                  width: 1,
+                ),
+                boxShadow: isSelected
+                    ? [
+                        BoxShadow(
+                          color: primaryColor.withOpacity(0.3),
+                          blurRadius: 8,
+                          spreadRadius: 1,
+                        ),
+                      ]
+                    : null,
               ),
-              elevation: canProceed ? 8 : 0,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.check_circle_outline,
-                  color: canProceed ? Colors.white : AppColors.textDarkSubtitle,
+              child: Text(
+                topic,
+                style: TextStyle(
+                  color: isSelected ? Colors.white : AppColors.textDarkTitle,
+                  fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
                 ),
-                SizedBox(width: 8),
-                Text(
-                  '¡Finalizar Configuración!',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
+              ),
             ),
-          ),
-        );
-      }),
-    );
+          );
+        }).toList(),
+      );
+    });
   }
 }
