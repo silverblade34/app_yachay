@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AuthDivider extends StatelessWidget {
-  const AuthDivider({super.key});
+  final String text;
+
+  const AuthDivider({
+    super.key,
+    required this.text,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +18,7 @@ class AuthDivider extends StatelessWidget {
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w),
           child: Text(
-            'o continúa con',
+            text,
             style: TextStyle(
               color: Colors.white54,
               fontSize: 12.sp,

@@ -1,6 +1,8 @@
 import 'package:app_yachay/config/constants/colors.dart';
 import 'package:app_yachay/core/widgets/custom_text_field.dart';
+import 'package:app_yachay/core/widgets/google_sign_in_button.dart';
 import 'package:app_yachay/features/auth/controllers/auth_controller.dart';
+import 'package:app_yachay/features/auth/presentation/widgets/auth_button.dart';
 import 'package:app_yachay/features/auth/presentation/widgets/auth_dividir.dart';
 import 'package:app_yachay/features/auth/presentation/widgets/auth_footer.dart';
 import 'package:app_yachay/features/auth/presentation/widgets/auth_header.dart';
@@ -8,7 +10,6 @@ import 'package:app_yachay/features/auth/presentation/widgets/social_button.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:ionicons/ionicons.dart';
 
 class LoginPage extends GetView<AuthController> {
   const LoginPage({super.key});
@@ -53,12 +54,18 @@ class LoginPage extends GetView<AuthController> {
                 isObscure: controller.isPasswordHidden.value,
                 onToggleVisibility: controller.togglePasswordVisibility,
               )),
-          SizedBox(height: 10.h),
-          _buildRememberAndForgot(),
-          SizedBox(height: 10.h),
-          _buildLoginButton(),
           SizedBox(height: 12.h),
-          const AuthDivider(),
+          _buildRememberAndForgot(),
+          SizedBox(height: 12.h),
+          AuthButton(
+            isLoading: controller.isLoading,
+            onPressed: controller.loginWithEmail,
+            text: 'Iniciar Sesión',
+            fontSize: 14,
+            padding: EdgeInsets.symmetric(vertical: 12),
+          ),
+          SizedBox(height: 12.h),
+          const AuthDivider(text: 'o continúa con'),
           SizedBox(height: 12.h),
           _buildSocialLogin(),
         ],
@@ -76,6 +83,7 @@ class LoginPage extends GetView<AuthController> {
                   onChanged: (value) => controller.rememberMe.value = value!,
                   activeColor: AppColors.primary,
                   checkColor: Colors.white,
+                  // ignore: deprecated_member_use
                   side: BorderSide(color: Colors.white.withOpacity(0.3)),
                 ),
                 Text(
@@ -103,96 +111,12 @@ class LoginPage extends GetView<AuthController> {
     );
   }
 
-  Widget _buildLoginButton() {
-    return Obx(() => GestureDetector(
-          onTap: controller.isLoading.value ? null : controller.loginWithEmail,
-          child: Container(
-            width: double.infinity,
-            padding: EdgeInsets.symmetric(vertical: 14.h),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: controller.isLoading.value
-                    ? [Colors.grey.shade600, Colors.grey.shade700]
-                    : [AppColors.primary, AppColors.primaryDark],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-              borderRadius: BorderRadius.circular(16.r),
-              boxShadow: [
-                BoxShadow(
-                  color: AppColors.primary.withOpacity(0.3),
-                  blurRadius: 12,
-                  offset: const Offset(0, 6),
-                ),
-              ],
-            ),
-            child: controller.isLoading.value
-                ?  Center(
-                    child: SizedBox(
-                      width: 20.w,
-                      height: 20.h,
-                      child: CircularProgressIndicator(
-                        color: Colors.white,
-                        strokeWidth: 2,
-                      ),
-                    ),
-                  )
-                : Text(
-                    'Iniciar Sesión',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-          ),
-        ));
-  }
-
   Widget _buildSocialLogin() {
     return Column(
       children: [
-        GestureDetector(
-          onTap: controller.loginWithGoogle,
-          child: Container(
-            width: double.infinity,
-            padding: EdgeInsets.symmetric(vertical: 14.h),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(16.r),
-              boxShadow: [
-                BoxShadow(
-                  // ignore: deprecated_member_use
-                  color: Colors.black.withOpacity(0.1),
-                  blurRadius: 8,
-                  offset: const Offset(0, 4),
-                ),
-              ],
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  width: 20.w,
-                  height: 20.h,
-                  child: Icon(
-                    Ionicons.logo_google,
-                    color: Colors.red,
-                  ),
-                ),
-                SizedBox(width: 12.w),
-                Text(
-                  'Continúa con Google',
-                  style: TextStyle(
-                    color: Colors.black87,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ],
-            ),
-          ),
+        GoogleSignInButton(
+          buttonText: 'Continúa con Google',
+          onPressed: controller.loginWithGoogle,
         ),
         SizedBox(height: 16.h),
         Row(

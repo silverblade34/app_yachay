@@ -1,4 +1,5 @@
 import 'package:app_yachay/config/constants/colors.dart';
+import 'package:app_yachay/config/routes/pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -40,16 +41,8 @@ class AuthController extends GetxController {
       // Aquí integrarías AWS Cognito
       await Future.delayed(const Duration(seconds: 2)); // Simulación
       
-      Get.snackbar(
-        '¡Bienvenido!',
-        'Has iniciado sesión exitosamente',
-        backgroundColor: AppColors.primary,
-        colorText: Colors.white,
-        snackPosition: SnackPosition.TOP,
-      );
-      
       // Navegar al Home
-      Get.offAllNamed('/home');
+      Get.offAllNamed(Routes.profileSetup);
     } catch (e) {
       Get.snackbar(
         'Error',

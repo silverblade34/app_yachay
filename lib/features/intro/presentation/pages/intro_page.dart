@@ -55,10 +55,20 @@ class IntroPage extends GetView<IntroController> {
                 ),
               ),
               SizedBox(height: 20.h),
+              // Indicadores y botones de navegación
               Obx(() => IntroIndicators(
-                    currentPageIndex: controller.currentPage.value,
-                    totalIndicators: controller.introData.length,
-                  )),
+                currentPageIndex: controller.currentPage.value,
+                totalIndicators: controller.introData.length,
+                onPreviousPressed: controller.canGoPrevious() 
+                    ? controller.goToPreviousPage 
+                    : null,
+                onNextPressed: controller.canGoNext() 
+                    ? controller.goToNextPage 
+                    : null,
+                onLoginPressed: controller.isLastPage() 
+                    ? controller.goToLogin 
+                    : null,
+              )),
             ],
           ),
         ),

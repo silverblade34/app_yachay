@@ -19,7 +19,7 @@ class SocialButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 14.h),
+        padding: EdgeInsets.symmetric(vertical: 12.h),
         decoration: BoxDecoration(
           color: AppColors.backgroundDarkIntense,
           borderRadius: BorderRadius.circular(16.r),

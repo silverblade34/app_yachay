@@ -1,5 +1,6 @@
 import 'package:app_yachay/config/constants/colors.dart';
 import 'package:app_yachay/config/constants/constance.dart';
+import 'package:app_yachay/config/constants/fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -43,21 +44,11 @@ class AuthHeader extends StatelessWidget {
             ),
           ),
           SizedBox(height: 18.h),
-          Text(
-            '¡Hola de nuevo!',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 24.sp,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+          Text('¡Hola de nuevo!', style: AppFonts.titleLogin),
           SizedBox(height: 8.h),
           Text(
             'Inicia sesión para continuar aprendiendo',
-            style: TextStyle(
-              color: Colors.white70,
-              fontSize: 14.sp,
-            ),
+            style: AppFonts.descriptionLogin,
             textAlign: TextAlign.center,
           ),
         ],

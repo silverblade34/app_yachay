@@ -8,6 +8,8 @@ import 'package:app_yachay/features/home/bindings/home_binding.dart';
 import 'package:app_yachay/features/home/presentation/pages/home_page.dart';
 import 'package:app_yachay/features/intro/bindings/intro_binding.dart';
 import 'package:app_yachay/features/intro/presentation/pages/intro_page.dart';
+import 'package:app_yachay/features/profile_setup/bindings/profile_setup_binding.dart';
+import 'package:app_yachay/features/profile_setup/presentation/pages/profile_setup_page.dart';
 import 'package:app_yachay/features/splash/bindings/splash_binding.dart';
 import 'package:app_yachay/features/splash/presentation/pages/splash_page.dart';
 import 'package:get/get.dart';
@@ -49,6 +51,12 @@ abstract class AppPages {
       name: Routes.register,
       page: () => const RegisterPage(),
       binding: RegisterBinding(),
+      transition: Transition.fadeIn,
+    ),
+      GetPage(
+      name: Routes.profileSetup,
+      page: () => const ProfileSetupPage(),
+      binding: ProfileSetupBinding(),
       transition: Transition.fadeIn,
     )
   ];

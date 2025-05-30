@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class AppFonts {
   static TextStyle titleIntro = TextStyle(
     color: HexColor('#E5E3FC'),
-    fontSize: 30.sp,
+    fontSize: 28.sp,
     fontWeight: FontWeight.bold,
   );
 
@@ -13,4 +13,15 @@ class AppFonts {
         fontSize: 14.sp,
         color: isLight ? HexColor('#857FB4') : HexColor('#E5E3FC'),
       );
+
+  static TextStyle titleLogin = TextStyle(
+    color: Colors.white,
+    fontSize: 23.sp,
+    fontWeight: FontWeight.bold,
+  );
+
+  static TextStyle descriptionLogin = TextStyle(
+    color: Colors.white70,
+    fontSize: 13.sp,
+  );
 }
