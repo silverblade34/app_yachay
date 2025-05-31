@@ -23,6 +23,7 @@ class AppResponsive {
   static EdgeInsets get paddingAll => EdgeInsets.all(16.w);
   static EdgeInsets get paddingXRegular => EdgeInsets.all(13.w);
   static EdgeInsets get paddingSmall => EdgeInsets.all(8.w);
+  static EdgeInsets get paddingXSmall => EdgeInsets.all(6.w);
   static EdgeInsets get paddingRegular => EdgeInsets.all(18.w);
   static EdgeInsets get paddingLarge => EdgeInsets.all(24.w);
 

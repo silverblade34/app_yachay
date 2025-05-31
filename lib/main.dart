@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dart:developer' as developer;
+import 'package:flutter/rendering.dart';
 
 void main() async {
   developer.log('', name: 'I/MESA');
@@ -26,6 +27,7 @@ void main() async {
   ]);
 
   WakelockPlus.enable();
+  //debugPaintSizeEnabled = true;
 
   runApp(
     ScreenUtilInit(
